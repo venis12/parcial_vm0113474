@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lista de Tareas</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+      
+      button {
+        padding: 10px 15px;
+        background-color: #49c0ba;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      
+    </style>
+  </head>
+  <body>
+    <div id="app" class="todo-app">
+      <h1>Lista de Tareas</h1>
+
+      <input
+        v-model="newTask"
+        placeholder="Agregar tarea"
+        @keyup.enter="addTask"
+      />
+      <button @click="addTask">Agregar Tarea</button>
+
+      <ul>
+        <li v-for="(task, index) in tasks" :key="index">
+          {{ task }}
+          <button @click="deleteTask(index)">Eliminar</button>
+        </li>
+      </ul>
+    </div>
+
+    <script>
+      const { createApp, ref } = Vue;
+
+      createApp({
+        setup() {
+          const tasks = ref([]); // Referencia para la lista de tareas
+          const newTask = ref(''); // Referencia para la nueva tarea
+
+          // Función para agregar una nueva tarea
+          const addTask = () => {
+            if (newTask.value.trim()) {
+              tasks.value.push(newTask.value);
+              newTask.value = ''; // Limpiar el campo de entrada
+            }
+          };
+
+          // Función para eliminar una tarea
+          const deleteTask = (index) => {
+            tasks.value.splice(index, 1);
+          };
+
+          return {
+            tasks,
+            newTask,
+            addTask,
+            deleteTask,
+          };
+        },
+      }).mount('#app');
+    </script>
+  </body>
+</html>

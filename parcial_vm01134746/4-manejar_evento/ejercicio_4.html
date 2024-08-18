@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 4</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h2>Mostrar Evento</h2>
+        <input v-model="inputValue" placeholder="Escribe algo">
+        <button @click="mostrarAlerta">Mostrar alerta</button>
+    </div>
+    <script>
+        Vue.createApp({
+            data() {
+                return {
+                    inputValue: ''
+                };
+            },
+            methods: {
+                mostrarAlerta() {
+                    alert(this.inputValue);
+                }
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>
